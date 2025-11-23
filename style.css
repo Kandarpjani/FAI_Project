@@ -1,0 +1,278 @@
+/*
+  Project: Tic-Tac-Toe with MiniMax AI
+  Redesigned UI Theme (functionality unchanged)
+*/
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background:
+        radial-gradient(circle at top left, #3a7bd5 0, transparent 55%),
+        radial-gradient(circle at bottom right, #00d2ff 0, #050816 55%);
+    color: #f5f5f7;
+}
+
+/* Outer content wrapper */
+.content {
+    padding: 1.5rem;
+}
+
+/* Main game card */
+.game-shell {
+    max-width: 480px;
+    background: rgba(10, 12, 28, 0.9);
+    border-radius: 24px;
+    padding: 2rem 1.5rem 1.75rem;
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(16px);
+}
+
+/* Header */
+.game-header {
+    color: #f5f5f7;
+}
+
+.game-title {
+    letter-spacing: 0.15em;
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.game-subtitle {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.game-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #4cc9f0, transparent);
+    width: 70%;
+    margin-top: 0.75rem;
+}
+
+/* Container text alignment override */
+.container {
+    text-align: center;
+}
+
+/* Status banner */
+#result.status-banner {
+    min-height: 40px;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #f5f5f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#result.status-banner:not(:empty) {
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    background: radial-gradient(circle at top left, rgba(76, 201, 240, 0.25), transparent),
+                rgba(255, 255, 255, 0.06);
+    box-shadow: 0 0 18px rgba(76, 201, 240, 0.35);
+}
+
+/* Board */
+.board-wrapper {
+    position: relative;
+    padding: 0.6rem;
+    border-radius: 24px;
+    background: radial-gradient(circle at top, rgba(255, 255, 255, 0.08), transparent 60%);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+        0 12px 30px rgba(0, 0, 0, 0.75);
+}
+
+/* Cells */
+.cell {
+    width: 100px;
+    height: 100px;
+    font-size: 3.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Indie Flower', 'Comic Sans MS', cursive;
+    border-width: 3px !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+    color: #ffffff;
+    transition:
+        background 0.15s ease-out,
+        transform 0.12s ease-out,
+        box-shadow 0.15s ease-out;
+}
+
+.cell:hover {
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.04);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+}
+
+.cell:not(:empty) {
+    background: rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.8);
+}
+
+/* X / O colors */
+.cell[data-mark="X"] {
+    color: #4cc9f0;
+    text-shadow: 0 0 10px rgba(76, 201, 240, 0.8);
+}
+
+.cell[data-mark="O"] {
+    color: #f72585;
+    text-shadow: 0 0 10px rgba(247, 37, 133, 0.8);
+}
+
+/* Buttons – base */
+button {
+    border: none;
+    outline: none;
+}
+
+.btn-game {
+    width: 200px;
+    padding: 10px 20px;
+    margin: 8px 6px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border-radius: 999px;
+    white-space: nowrap;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition:
+        transform 0.12s ease-out,
+        box-shadow 0.12s ease-out,
+        background 0.15s ease-out,
+        color 0.15s ease-out;
+}
+
+/* Variants */
+.btn-game.primary {
+    background: linear-gradient(135deg, #4cc9f0, #4895ef);
+    color: #050816;
+    box-shadow: 0 10px 24px rgba(72, 149, 239, 0.5);
+}
+
+.btn-game.accent {
+    background: linear-gradient(135deg, #f72585, #b5179e);
+    color: #fff;
+    box-shadow: 0 10px 24px rgba(183, 23, 158, 0.55);
+}
+
+.btn-game.warning {
+    background: linear-gradient(135deg, #ffb703, #fb8500);
+    color: #050816;
+    box-shadow: 0 10px 24px rgba(251, 133, 0, 0.55);
+}
+
+.btn-game.subtle {
+    background: rgba(255, 255, 255, 0.06);
+    color: #f5f5f7;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Hover / active */
+.btn-game:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.8);
+}
+
+.btn-game:active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.7);
+}
+
+/* Winning line */
+#line {
+    height: 3px;
+    background: linear-gradient(90deg, #f72585, #4cc9f0);
+    position: absolute;
+    box-shadow: 0 0 16px rgba(247, 37, 133, 0.9);
+}
+
+/* Keep geometry consistent with 3x3 100px grid */
+.line-diagonal-right {
+    width: 361px;
+    transform: rotateY(0deg) rotate(45deg);
+    translate: -43px 142px;
+}
+
+.line-diagonal-left {
+    width: 361px;
+    transform: rotateY(180deg) rotate(45deg);
+    translate: -44px 150px;
+}
+
+.line-horizontal-center {
+    width: 300px;
+    translate: -12px 145px;
+}
+
+.line-horizontal-top {
+    width: 300px;
+    translate: -12px 45px;
+}
+
+.line-horizontal-bottom {
+    width: 300px;
+    translate: -12px 247px;
+}
+
+.line-vertical-left {
+    width: 299px;
+    transform: rotateY(180deg) rotate(90deg);
+    translate: -111px 147px;
+}
+
+.line-vertical-center {
+    width: 299px;
+    transform: rotateY(180deg) rotate(90deg);
+    translate: calc(0% - 9px) 147px;
+}
+
+.line-vertical-right {
+    width: 299px;
+    transform: rotateY(180deg) rotate(90deg);
+    translate: calc(50% - 58px) 147px;
+}
+
+/* Footer */
+.game-footer {
+    margin-top: 1.25rem;
+    opacity: 0.7;
+    font-size: 0.8rem;
+}
+
+/* Small screens */
+@media (max-width: 576px) {
+    .game-shell {
+        padding: 1.6rem 1.1rem 1.5rem;
+    }
+
+    .cell {
+        width: 90px;
+        height: 90px;
+        font-size: 2.8rem;
+    }
+
+    .board-wrapper {
+        transform: scale(0.9);
+    }
+}
